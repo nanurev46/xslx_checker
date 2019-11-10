@@ -20,6 +20,7 @@ namespace WindowsFormsApp2
             
         }
 
+        //opendialog, парсим ехел-файл в грид
         public DataTable openTable()
         {
             DataTable result = new DataTable();
@@ -49,6 +50,7 @@ namespace WindowsFormsApp2
             return result;
         }
 
+        //Ищем строку по клику
         public static void findRecWithHands(DataGridView dsSource, DataGridView dgToFind)
         {
             int colCount = dsSource.ColumnCount;
@@ -97,11 +99,9 @@ namespace WindowsFormsApp2
                 MessageBox.Show("Количество столбцов в гридах не совпадает");
             }
 
-
-            //логирование
-
         }
 
+        //Сверяем гриды автоматически
         public void findRecsAuto (DataGridView dgSource, DataGridView dgToFind)
         {
             int colCount = dgSource.ColumnCount;
@@ -199,6 +199,7 @@ namespace WindowsFormsApp2
             return result;
         }
 
+        //Валидация, что кол-во столбцов у гридов одинаковое
         public static bool checkColCount(DataGridView dsSource, DataGridView dgToFind)
         {
             int colCount = dsSource.ColumnCount;
@@ -212,73 +213,33 @@ namespace WindowsFormsApp2
             return false;
         }
 
-            private void button1_Click(object sender, EventArgs e)
+        //Открываем файл 1
+        private void button1_Click(object sender, EventArgs e)
         {
 
             dataGridView1.DataSource = openTable();
         }
 
+        //Открываем файл 2
         private void button2_Click(object sender, EventArgs e)
         {
             dataGridView2.DataSource = openTable();
 
         }
 
+        //Ищем строку по клику
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             findRecWithHands(dataGridView1, dataGridView2);
-/*
-            int colCount = dataGridView1.ColumnCount;
-            int rowCount = dataGridView2.RowCount-1;
-
-            if (colCount != dataGridView2.ColumnCount){
-                MessageBox.Show("Количество столбцов в гридах не совпадает");
-                return;
-            }
-
-                        bool flag = true;
-                        List<int> listNum = new List<int>();
-                        for (int i = 0; i < rowCount; i++)
-                        {
-                            flag = true;
-                            for (int j = 0; j < colCount; j++)
-                            {
-                                if (!dataGridView1.SelectedRows[0].Cells[j].Value.ToString().Equals(dataGridView2.Rows[i].Cells[j].Value.ToString())){
-                                    flag = false;
-                                    break;
-                                }
-                            }
-
-                            if (flag)
-                            {
-                                listNum.Add(i);
-                            }
-
-                        }
-                        if (listNum.Count == 1)
-                        {
-                            dataGridView2.ClearSelection();
-                            dataGridView2.Rows[listNum[0]].Selected = true;
-                            dataGridView2.CurrentCell = dataGridView2.SelectedRows[0].Cells[0];
-                        }
-
-                        if (listNum.Count > 1)
-                        {
-                            String message = "Количество совпадений: " + listNum.Count + ". /r/n;" +
-                                            "Номера строк: ";
-                            foreach (int l in listNum){
-                                message = String.Concat(message + l + ", ");
-                            }        
-                            MessageBox.Show("Количество столбцов в гридах не совпадает");
-                        }
-                        */
         }
 
+        //Ищем строку по клику
         private void dataGridView2_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             findRecWithHands(dataGridView2, dataGridView1);
         }
 
+        //Сверяем гриды автоматически
         private void button3_Click(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
